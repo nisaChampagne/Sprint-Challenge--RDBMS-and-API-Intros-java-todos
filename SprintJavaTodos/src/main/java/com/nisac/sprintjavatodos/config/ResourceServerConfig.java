@@ -34,20 +34,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                         "/swagger-resource/**",
                         "/swagger-ui.html",
                         "/v2/api-docs",
-                        "/webjars/**").permitAll()
-                ///list of endpoints in antMatchers
-                ///../** means all links underneath it accessible
-
-
-//                .antMatchers("/users/**", "/quotes/**").authenticated()
-//                ///anyone with valid token can go to anything under users and anything under quotes
-//                .antMatchers("/roles").hasAnyRole("ADMIN")
-//                ///for any endpoint ending in /roles has to have role  ADMIN to access
-//                //a regular user would get access denied when attempting to go to ../roles
-
-                    .antMatchers("/users/**").authenticated()
-                    .antMatchers("/roles", "/users/", "/todos/**").hasAnyRole("ADMIN")
-                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+                        "/webjars/**",
+                        "/todos/**",
+                        "/users/todo/**").permitAll()
+            .antMatchers("/users/mine").authenticated()
+            .antMatchers("/users/**", "/todos/**").hasAnyRole("ADMIN")
+            .antMatchers("/actuator/**").hasAnyRole("ADMIN")                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
