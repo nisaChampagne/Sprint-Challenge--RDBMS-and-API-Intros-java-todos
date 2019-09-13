@@ -25,21 +25,21 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception
     {
         // http.anonymous().disable();
-        http.authorizeRequests()
-                .antMatchers("/",                       // h2
-                        "/h2-console/**",
-                        "/swagger-resources/**",
-                        "/swagger-resources/configuration/ui",
-                        "/swagger-resources/configuration/security",
-                        "/swagger-resource/**",
-                        "/swagger-ui.html",
-                        "/v2/api-docs",
-                        "/webjars/**",
-                        "/todos/**",
-                        "/users/todo/**").permitAll()
-            .antMatchers("/users/mine").authenticated()
-            .antMatchers("/users/**", "/todos/**").hasAnyRole("ADMIN")
-            .antMatchers("/actuator/**").hasAnyRole("ADMIN")                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+        http.authorizeRequests().antMatchers("/",
+                "/h2-console/**",
+                "/swagger-resources/**",
+                "/swagger-resources/configuration/ui",
+                "/swagger-resources/configuration/security",
+                "/swagger-resource/**",
+                "/swagger-ui.html",
+                "/v2/api-docs",
+                "/webjars/**",
+                "/todos/**",
+                "/users/todo/**").permitAll()
+                .antMatchers("/users/mine").authenticated()
+                .antMatchers("/users/**", "/todos/**").hasAnyRole("ADMIN")
+                .antMatchers("/actuator/**").hasAnyRole("ADMIN")
+                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
         http.csrf().disable();
         http.headers().frameOptions().disable();

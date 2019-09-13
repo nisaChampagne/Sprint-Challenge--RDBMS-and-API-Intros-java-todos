@@ -83,7 +83,7 @@ public class Todo extends Auditable
     }
 
     public void setCompleted(boolean completed) {
-        this.completed = completed;
+        this.completed = false;
     }
 
     public User getUser() {

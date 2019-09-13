@@ -25,39 +25,19 @@ public class UserController
     @Autowired
     private UserService userService;
 
-    ///localhost:5005/users/viewall   GET
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping(value = "/viewall", produces = {"application/json"})
-    public ResponseEntity<?> listAllUsers()
+///localhost:2019/users/mine
+    @GetMapping (value = "/mine", produces = {"application/json"})
+    public ResponseEntity<?> listMyTodos()
     {
-        List<User> myUsers = userService.findAll();
-        return new ResponseEntity<>(myUsers, HttpStatus.OK);
+        List<User> myTodos = userService.findAll();
+        return new ResponseEntity<>(myTodos, HttpStatus.OK);
     }
 
-    ///localhost:5005/users/view/{userId}    GET
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping(value = "/view/{userId}", produces = {"application/json"})
-    public ResponseEntity<?> getUser(@PathVariable
-                                             Long userId)
-    {
-        User u = userService.findUserById(userId);
-        return new ResponseEntity<>(u, HttpStatus.OK);
-    }
-
-    ///localhost:5005/users/getusername     GET
-    @GetMapping(value = "/getusername", produces = {"application/json"})
-    @ResponseBody
-    public ResponseEntity<?> getCurrentUserName(Authentication authentication)
-    {
-        return new ResponseEntity<>(userService.findUserByName(authentication.getName()), HttpStatus.OK);
-        // return new ResponseEntity<>(userService.findUserByName(authentication.getName()).getUserid(), HttpStatus.OK);
-    }
-
-    ///localhost:5005/users/add    POST
+    ///localhost:2019/users/add    POST
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/add", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<?> addNewUser(@Valid @RequestBody
-                                                User newuser) throws URISyntaxException
+    public ResponseEntity<?> addNewUser
+    (@Valid @RequestBody User newuser) throws URISyntaxException
     {
         newuser =  userService.save(newuser);
 
@@ -73,21 +53,21 @@ public class UserController
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    ///localhost:5005/users/update/{id}    PUT
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody
-                                                User updateUser, @PathVariable
-                                                long id)
+    ///localhost:2019/users/todo/{id}    PUT
+    @PutMapping(value = "/todo/{id}")
+    public ResponseEntity<?> updateUser
+    (@RequestBody User updateUser,
+     @PathVariable long id)
     {
         userService.update(updateUser, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    ///localhost:5005/users/delete/{id}    DELETE
+    ///localhost:2019/users/userid/{id}    DELETE
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable
-                                                    long id)
+    @DeleteMapping("/userid/{id}")
+    public ResponseEntity<?> deleteUserById
+    (@PathVariable long id)
     {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

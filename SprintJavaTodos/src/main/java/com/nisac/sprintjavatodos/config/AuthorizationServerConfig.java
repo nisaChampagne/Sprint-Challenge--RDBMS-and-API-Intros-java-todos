@@ -21,8 +21,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 ///manages the tokens
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter
 {
-    static final String CLIENT_ID = "nisa-client";//we can configure
-    static final String CLIENT_SECRET = "nisa-secret";///we can configure
+    static final String CLIENT_ID = "lambda-client";//we can configure
+    static final String CLIENT_SECRET = "lambda-secret";///we can configure
     static final String GRANT_TYPE_PASSWORD = "password";//we can configure
     static final String AUTHORIZATION_CODE = "authorization_code";
     static final String REFRESH_TOKEN = "refresh_token";
