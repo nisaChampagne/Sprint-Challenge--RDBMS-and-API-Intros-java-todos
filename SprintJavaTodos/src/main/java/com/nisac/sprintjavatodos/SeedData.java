@@ -1,4 +1,19 @@
-// provided by Vivek Vishwanath
+package com.nisac.sprintjavatodos;
+
+
+import com.nisac.sprintjavatodos.models.Role;
+import com.nisac.sprintjavatodos.models.Todo;
+import com.nisac.sprintjavatodos.models.User;
+import com.nisac.sprintjavatodos.models.UserRoles;
+import com.nisac.sprintjavatodos.repos.RoleRepository;
+import com.nisac.sprintjavatodos.repos.ToDoRepository;
+import com.nisac.sprintjavatodos.repos.UserRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 @Transactional
 @Component
